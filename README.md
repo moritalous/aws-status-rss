@@ -7,8 +7,7 @@ LambdaとS3、CloudWatch Eventsでできています。
 1. Lambdaレイヤーをつくる
 
 ```
-pip install -r requirement.txt -t python/
-zip -r layer.zip python
+docker run -v $PWD:/work amazonlinux:2 /bin/bash /work/createlayer.sh
 ```
 
 2. Lambdaレイヤーをアップロード

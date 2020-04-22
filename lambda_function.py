@@ -14,12 +14,12 @@ rss_template = ('<?xml version="1.0" encoding="UTF-8"?>'
                 '</rss>'
                 )
 
-output_soup = BeautifulSoup(rss_template, 'html.parser')
+output_soup = BeautifulSoup(rss_template, 'xml')
 
 
 def get_rss_list():
     res = requests.get(base_url)
-    aws_soup = BeautifulSoup(res.text, 'html.parser')
+    aws_soup = BeautifulSoup(res.text, 'lxml')
 
     links = [url.get('href')
              for url in aws_soup.find(id="AP_block").find_all('a')]
@@ -39,7 +39,7 @@ def get_rss_item(rss_url):
 
 
 def add_rss_item(rss_text):
-    rss = BeautifulSoup(rss_text, 'html.parser')
+    rss = BeautifulSoup(rss_text, 'xml')
     items = rss.find_all('item')
     for item in items:
         output_soup.find('channel').append(item)
